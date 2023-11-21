@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+// Loader component
+const Loader = () => (
+  <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(255, 255, 255, 0.8)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <div className="spinner"></div>
+  </div>
+);
+
 export function StockHandler() {
   const [selectedNumber, setSelectedNumber] = useState(0);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const containerStyle = {
@@ -30,21 +38,28 @@ export function StockHandler() {
   };
 
   const navigateBack = () => {
-    localStorage.clear()
+    localStorage.clear();
     navigate("/");
   };
 
-  const handleNumberChange = (event) => {
-    const number = parseInt(event.target.value, 10);
-    setSelectedNumber(isNaN(number) ? 0 : number);
+  const handleNumberClick = (number) => {
+    const newNumber = parseInt(`${selectedNumber}${number}`, 10);
+    setSelectedNumber(newNumber);
+  };
+
+  const handleClearClick = () => {
+    setSelectedNumber(0);
   };
 
   const handleSaveAndSend = () => {
     console.log("Número seleccionado:", selectedNumber);
-
+  
+    // Set loading to true before the fetch
+    setLoading(true);
+  
     // Aquí puedes agregar lógica para enviar el número al back-end
     // ...
-
+  
     // Navegamos de regreso a la página principal después de realizar la acción
     fetch(`/dispenser/stock/${localStorage.getItem("machineId")}/${selectedNumber}`, {
       method: "POST", // Especificar el método POST
@@ -60,30 +75,55 @@ export function StockHandler() {
       })
       .catch((error) => {
         console.error("Error en la solicitud:", error);
+      })
+      .finally(() => {
+        // Reset loading state
+        setLoading(false);
       });
-
-    // Vuelve atrás después de realizar la acción
-    navigateBack();
   };
+  
 
   return (
-    <div style={containerStyle}>
-      <h1>Stock Handler</h1>
-      <label>
-        Select a number:
+    <div>
+      {/* Full-page loader */}
+      {loading && <Loader />}
+
+      <header style={{ background: "#333", color: "white", textAlign: "center", padding: "1em", marginBottom: "50px" }}>
+        <h1>Handle Stock</h1>
+      </header>
+      <div style={containerStyle}>
+        {/* Display the selected number */}
         <input
-          type="number"
+          type="text"
           value={selectedNumber}
-          onChange={handleNumberChange}
+          onChange={() => {}}
           style={inputStyle}
+          readOnly
         />
-      </label>
-      <button onClick={handleSaveAndSend} style={buttonStyle}>
-        Update stock
-      </button>
-      <button onClick={navigateBack} style={buttonStyle}>
-        Go Back
-      </button>
+
+        {/* Your keypad */}
+        <div className="keypad">
+          <div className="content">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => (
+              <div key={number} onClick={() => handleNumberClick(number)}>
+                {number}
+              </div>
+            ))}
+            <div onClick={handleClearClick}>Clear</div>
+          </div>
+        </div>
+
+        {/* Button to save and send the selected number */}
+        <button onClick={handleSaveAndSend} style={buttonStyle}>
+          {loading ? "Saving..." : "Enter"}
+        </button>
+
+        {/* "Go Back" button */}
+        <span style={{ fontSize: "18px", cursor: "pointer", marginTop: "10px" }} onClick={navigateBack}>
+          ← Go Back
+        </span>
+      </div>
     </div>
   );
 }
+

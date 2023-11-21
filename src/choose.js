@@ -6,7 +6,8 @@ export function Choose() {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "50px",
+    marginTop: "200px",
+    gap:"100px"
   };
 
   const buttonStyle = {
@@ -42,15 +43,22 @@ export function Choose() {
     navigate("/stock");
   };
 
-  return (
+  return ( <div>
+    <header style={{ background: "#333", color: "white", textAlign: "center", padding: "1em", marginBottom: "50px" }}>
+      <h1>What do you want to do?</h1>
+    </header>
     <div style={containerStyle}>
-      <div style={titleStyle}>Choose what do you want to do</div>
-      <button style={buttonStyle} onClick={handleDispenseClick}>
+      <button  className="sbutton"onClick={handleDispenseClick}>
+        <span>
         Dispense
+        </span>
       </button>
-      <button style={buttonStyle} onClick={handleStockClick}>
-        Check Stock
+      <button className="sbutton" onClick={handleStockClick}>
+        <span>
+        Handle Stock
+        </span>
       </button>
+    </div>
     </div>
   );
 }

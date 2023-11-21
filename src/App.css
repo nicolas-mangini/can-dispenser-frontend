@@ -1,38 +1,224 @@
-.App {
-  text-align: center;
+.btn-class-name {
+  --primary: 255, 90, 120;
+  --secondary: 150, 50, 60;
+  width: 170px;
+  height: 130px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  outline: 10px solid rgb(var(--primary), .5);
+  border-radius: 100%;
+  position: relative;
+  transition: .3s;
+  margin: 4rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-class-name .back {
+  background: rgb(var(--secondary));
+  border-radius: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn-class-name .front {
+  background: linear-gradient(0deg, rgba(var(--primary), .6) 20%, rgba(var(--primary)) 50%);
+  box-shadow: 0 .5em 1em -0.2em rgba(var(--secondary), .5);
+  border-radius: 100%;
+  position: absolute;
+  border: 1px solid rgb(var(--secondary));
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: inherit;
+  transform: translateY(-15%);
+  transition: .15s;
+  color: rgb(var(--secondary));
 }
 
-.App-link {
-  color: #61dafb;
+.btn-class-name:active .front {
+  transform: translateY(0%);
+  box-shadow: 0 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sbutton {
+  padding: 0.1em 0.25em;
+  width: 13em;
+  height: 4.2em;
+  background-color: #212121;
+  border: 0.08em solid #fff;
+  border-radius: 0.3em;
+  font-size: 12px;
 }
+
+.sbutton span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0.4em;
+  width: 8.25em;
+  height: 2.5em;
+  background-color: #212121;
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  color: #fff;
+  border: 0.08em solid #fff;
+  box-shadow: 0 0.4em 0.1em 0.019em #fff;
+}
+
+.sbutton span:hover {
+  transition: all 0.5s;
+  transform: translate(0, 0.4em);
+  box-shadow: 0 0 0 0 #fff;
+}
+
+.sbutton span:not(hover) {
+  transition: all 1s;
+}
+
+
+.keypad {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: auto;
+	
+	.dots {
+		display: inline-flex;
+		
+		background: pink;
+		margin: 1.5rem 0;
+		
+		div {
+			width: 1rem;
+			height: 1rem;
+			background: transparent;
+			margin: 0.7rem 1rem;
+			border-radius: 50%;
+			border: 1px solid #000;
+		}
+	}
+	
+}
+
+.content {
+	background: #FFFFFF;
+	border-radius: 20px;
+	
+	font-family: sans-serif;
+	height: auto;
+	padding: 0.6rem;
+  width: 516px;
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	
+	box-shadow: -10px -10px 30px 4px rgba(154, 203, 255, 0.15),
+              10px 10px 30px 4px rgba(154, 203, 255, 0.15);
+	
+	@media (max-width: 992px) {
+		width: 344px;		
+	}
+	
+	@media (max-width: 572px) {
+		width: 258px;
+		min-width: 258px;
+	}
+	
+	div {
+		width: 70px;
+		height: 70px;
+		background: #f5f9fc;
+		border-radius: 14px;
+		cursor: pointer;
+		margin: 0.5rem;
+		font-size: 1.4rem;
+		color: #474747;	
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 250ms ease;
+				
+		&:hover {
+			background: #e2e9f2;
+		}
+		
+		&:active {
+			background: #c7d7e6;
+		}
+	}
+	
+	.b6 {
+		order: 1;
+		@media (max-width: 992px) {
+			order: 0;
+		}
+	}
+	
+	.b7 {
+		order: 1;
+		@media (max-width: 992px) {
+			order: 0;
+		}
+		@media (max-width: 572px) {
+			order: 0;
+		}
+	}
+	
+	.b8 {
+		order: 1;
+		@media (max-width: 572px) {
+			order: 0;
+		}
+	}
+	
+	.b9 {
+		order: 1;
+	}
+	
+	.b0 {
+		order: 1;
+	}
+	
+	.enter {
+		background: #266eff;
+		color: #FFFFFF;
+		font-size: 1rem;
+		order: 1;
+		
+		&:hover {
+			background: #0957f4;
+		}
+		
+		&:active {
+			background: #004be4;
+		}
+	}
+	
+	.clear {
+		background: #fff3cb;
+		color: #474747;
+		font-size: 1rem;
+		order: 3;
+		
+		&:hover {
+			background: #ffecae;
+		}
+		
+		&:active {
+			background: #fee38b;
+		}
+	}
+}
+
