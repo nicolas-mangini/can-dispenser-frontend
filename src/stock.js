@@ -20,12 +20,6 @@ export function StockHandler() {
     marginTop: "50px",
   };
 
-  const inputStyle = {
-    width: "200px",
-    padding: "10px",
-    fontSize: "16px",
-    margin: "10px",
-  };
 
   const buttonStyle = {
     background: "#808080",
@@ -89,7 +83,7 @@ export function StockHandler() {
       {loading && <Loader />}
 
       <header style={{ background: "#333", color: "white", textAlign: "center", padding: "1em", marginBottom: "50px" }}>
-        <h1>Handle Stock</h1>
+        <h1>Dispense button</h1>
       </header>
       <div style={containerStyle}>
         {/* Display the selected number */}
@@ -97,7 +91,7 @@ export function StockHandler() {
           type="text"
           value={selectedNumber}
           onChange={() => {}}
-          style={inputStyle}
+          className="input"
           readOnly
         />
 

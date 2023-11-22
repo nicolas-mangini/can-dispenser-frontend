@@ -93,23 +93,6 @@
 	flex-direction: column;
 	align-items: center;
 	width: auto;
-	
-	.dots {
-		display: inline-flex;
-		
-		background: pink;
-		margin: 1.5rem 0;
-		
-		div {
-			width: 1rem;
-			height: 1rem;
-			background: transparent;
-			margin: 0.7rem 1rem;
-			border-radius: 50%;
-			border: 1px solid #000;
-		}
-	}
-	
 }
 
 .content {
@@ -135,8 +118,8 @@
 		width: 258px;
 		min-width: 258px;
 	}
-	
-	div {
+}
+.content div {
 		width: 70px;
 		height: 70px;
 		background: #f5f9fc;
@@ -220,5 +203,24 @@
 			background: #fee38b;
 		}
 	}
-}
+	.input {
+		border: none;
+		outline: none;
+		border-radius: 20px;
+		padding: 1.5em;
+		background-color: #e2e2e2;
+		box-shadow: inset 2px 5px 10px rgba(219, 213, 213, 0.3);
+		transition: 300ms ease-in-out;
+		margin-bottom: 50px;
+		font-size: 18px; /* Increase font size */
+		font-family: 'Arial', sans-serif; /* Use a more standard font or adjust as needed */
+	  }
+	  
+	  .input:focus {
+		background-color: white;
+		transform: scale(1.05);
+		box-shadow: 13px 13px 100px #969696,
+		  -13px -13px 100px #ffffff;
+	  }
+	  
 
